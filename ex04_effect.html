@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery-3.6.0.js"></script>
+
+    <style>
+        #box {
+            border: 10px solid black;
+            width: 200px;
+            height: 200px;
+            background-color: goldenrod;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        ex04_effect.html
+    -->
+    <h1>jQuery Effect - CSS 애니메이션(transition, animate)</h1>
+    <input type="button" value="버튼1" id="btn1">
+    <input type="button" value="버튼2" id="btn2">
+    <input type="button" value="버튼3" id="btn3">
+
+    <hr>
+
+    <div id="box">상자</div>
+
+    <script>
+        // jQuery('#btn1')
+        // $('#btn1'): Alias
+        // console.log(jQuery === $); // true;
+
+        $('#btn1').click(function(){
+            /*
+            jQuery Effect Function
+            1. hide(time), show(time), toggle(time)
+            2. fadeOut(), fadeIn(), fadeToggle()
+            3. slideUp(), slideDown(), slideToggle()
+            4. animate()
+            */
+            // $('#box').hide('slow');
+            // $('#box').fadeOut();
+            // $('#box').slideUp();
+
+            $('#box').animate({
+                // width: '300px',
+                // height: '300px'
+
+                // width: 300 // px 기본값
+
+                // width: '+=100px',
+                // height: '+=50px'
+
+                width: 'toggle',
+                height: 'toggle',
+                opacity: 'toggle'
+            }, 1000);
+
+            // $('#box').hide();
+            // $('#box').hide(3000, function(){});
+            // $('#box').hide(function(){}); // 콜백함수
+            // $('#box').hide(3000);
+
+            // 애니메이션 종료 후 실행 -> 콜백 함수
+            // $('#box').hide(3000, function(){
+            //     alert();
+            // });
+
+
+            // $('#box').hide(3000);
+            // setTimeout(function(){
+            //     $('body').css('background-color', 'black');
+            // }, 3000);
+
+            // $('#box').hide(3000, function() {
+            //     $('body').css('background-color', 'black');
+            // });
+
+            // 연쇄 반응 구현
+            $('#box').hide(3000, function(){
+                $('#box').show(3000, function(){
+                    $('#box').hide(3000);
+                });
+            });
+
+            // jQuery함수 중 일부는 실행 후 해당 객체 반환하는 경우가 있다.
+            // -> 메소드 체이닝 구현 가능
+            // -> 동기화 제공(앞의 애니메이션 이 진행되길 기다렸다가 뒤의 애니메이션을 진행)
+            $('#box').hide(1000)
+                     .show(1000)
+                     .fadeIn(1000)
+                     .fadeIn(1000)
+                     .slideup(1000)
+                     .slideDown(1000)
+                     .animate({
+                         width: '+=200px'
+                     },1000)
+                     .animate({
+                         height: '-=100px'
+                     },1000);
+
+        });
+
+        $('#btn2').click(function(){
+            // $('#box').show('fast');
+            // $('#box').show('500'); // ms
+            // $('#box').fadeIn();
+            // $('#box').slideDown();
+        });
+
+        $('#btn3').click(function(){
+            // $('#box').toggle();
+            // $('#box').fadeToggle();
+            // $('#box').slideToggle();
+        });
+
+        
+        // 방법1.
+        // $('#box').mouseover(function() {
+        //     $('#box').css('background-color', 'tomato');
+        // });
+
+        // $('#box').mouseout(function() {
+        //     $('#box').css('background-color', 'gold');
+        // });
+
+
+        // 방법2.
+        // $('#box').mouseover(function(){
+        //     $('#box').css('background-color', 'tomato');
+        //     })
+        //     .mouseout(function() {
+        //         $('#box').css('background-color', 'gold');
+        //     });
+
+
+        // 방법3.
+        // $('#box').on({
+        //     mouseover: function() {
+        //         $('#box').css('background-color', 'tomato');
+        //     },
+        //     mouseout: function() {
+        //         $('#box').css('background-color', 'gold');
+        //     }
+        // });
+
+    </script>
+</body>
+</html>
